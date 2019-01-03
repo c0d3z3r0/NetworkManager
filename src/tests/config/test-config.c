@@ -1044,20 +1044,14 @@ test_config_state_file (void)
 	g_assert (state);
 
 	g_assert_cmpint (state->net_enabled, ==, TRUE);
-	g_assert_cmpint (state->wifi_enabled, ==, TRUE);
-	g_assert_cmpint (state->wwan_enabled, ==, TRUE);
 
 	nm_config_state_set (config, TRUE, TRUE,
-	                     NM_CONFIG_STATE_PROPERTY_NETWORKING_ENABLED, FALSE,
-	                     NM_CONFIG_STATE_PROPERTY_WIFI_ENABLED, TRUE,
-	                     NM_CONFIG_STATE_PROPERTY_WWAN_ENABLED, FALSE);
+	                     NM_CONFIG_STATE_PROPERTY_NETWORKING_ENABLED, FALSE);
 
 	state = nm_config_state_get (config);
 	g_assert (state);
 
 	g_assert_cmpint (state->net_enabled, ==, FALSE);
-	g_assert_cmpint (state->wifi_enabled, ==, TRUE);
-	g_assert_cmpint (state->wwan_enabled, ==, FALSE);
 
 	g_object_unref (config);
 
@@ -1070,8 +1064,6 @@ test_config_state_file (void)
 	g_assert (state);
 
 	g_assert_cmpint (state->net_enabled, ==, FALSE);
-	g_assert_cmpint (state->wifi_enabled, ==, TRUE);
-	g_assert_cmpint (state->wwan_enabled, ==, FALSE);
 
 	g_object_unref (config);
 	unlink (TMP_FILE);
